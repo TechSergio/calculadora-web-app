@@ -9,49 +9,73 @@ window.addEventListener("load", function(event) {
     btns.forEach((btn => {
         btn.addEventListener("click", (e)=>{
             console.log(operando)
+            //BOTON AC
             if (e.target.id == "clear"){
                 display.textContent= ""
-
             }else if (e.target.id =="delete"){
+                //BOTON DEL
                 //el -1, es para que guarde todo el string menos el ultimo elemento de la cadena.
-                if (agregarOperador(display.innerText)){
+                if (esNumeroValido(display.innerText)){
                     operando = "X"
                 }
                 display.innerText = display.innerText.slice(0,-1)
             }else if (e.target.id =="percentage"){
-                if (agregarOperador(display.innerText)) {
+                if (esNumeroValido(display.innerText)) {
                     display.innerText += "%"
                     operando = "%"
                 }
             }else if (e.target.id =="divider"){
-                if (agregarOperador(display.innerText)) {
+                if (esNumeroValido(display.innerText)) {
                     display.innerText += "/"
                     operando = "/"
                 }
             }else if (e.target.id =="multiplier"){
-                if (agregarOperador(display.innerText)) {
+                if (esNumeroValido(display.innerText)) {
                     display.innerText += "*"
                     operando = "*"
                 }
             }else if (e.target.id =="subtract"){
-                if (agregarOperador(display.innerText)) {
+                if (esNumeroValido(display.innerText)) {
                     display.innerText += "-"
                     operando = "-"
                 }
             }else if (e.target.id =="sum"){
-                if (agregarOperador(display.innerText)) {
+                if (esNumeroValido(display.innerText)) {
                     display.innerText += "+"
                     operando = "+"
+                }
+            }else if (e.target.id =="."){
+                if (esNumeroValido(display.innerText)) {
+                    display.innerText += "."
+                    operando = "."
                 }
             }else if (e.target.classList.contains("btn-number")){
                 display.innerText += e.target.id
             }else if (display.innerText != "" && e.target.id == "equal"){
-                if (agregarOperador(display.innerText) && operando!="X"){
+                //Si el display esta vacio, y si se presiono =,evaluar operador...
+
+                if (esNumeroValido(display.innerText) && operando!="X"){
                     
                     let valores = display.innerText.split(operando)
                     console.log(valores)
                     if (operando == "+"){
                         let res =sum(parseFloat(valores[0]),parseFloat(valores[1]))
+                        console.log(res)
+                        display.innerText = res.toString()
+                    }else if(operando == "-"){
+                        let res =subtract(parseFloat(valores[0]),parseFloat(valores[1]))
+                        console.log(res)
+                        display.innerText = res.toString()
+                    }else if(operando == "*"){
+                        let res =product(parseFloat(valores[0]),parseFloat(valores[1]))
+                        console.log(res)
+                        display.innerText = res.toString()
+                    }else if(operando == "/"){
+                        let res =divide(parseFloat(valores[0]),parseFloat(valores[1]))
+                        console.log(res)
+                        display.innerText = res.toString()
+                    }else if(operando ="%"){
+                        let res =percentage(parseFloat(valores[0]),parseFloat(valores[1]))
                         console.log(res)
                         display.innerText = res.toString()
                     }
@@ -78,7 +102,7 @@ function subtract(x,y){
 /*                             Funcion Multiplicar                            */
 /* -------------------------------------------------------------------------- */
 function product(x,y){
-    return(x,y)
+    return(x*y)
 }
 /* -------------------------------------------------------------------------- */
 /*                               Funcion Dividir                              */
@@ -98,12 +122,21 @@ function validateDivisor(x,y){
 }
 
 /* -------------------------------------------------------------------------- */
+/*                             Funcion porcentaje                             */
+/* -------------------------------------------------------------------------- */
+
+function percentage(x,y){
+    return (x/100*y)
+}
+
+
+/* -------------------------------------------------------------------------- */
 /*                              Agregar Operador                              */
 /* -------------------------------------------------------------------------- */
 //Comprueba que en el display no se haya ingresado una operacion previamente 
-function agregarOperador(cadena){
-    if ( (cadena[cadena.length - 1] != "%") && ((cadena[cadena.length - 1] != "/")) && (cadena[cadena.length - 1] != "+") && (cadena[cadena.length - 1] != "-") && (cadena[cadena.length - 1] != ".") ) {
-        return true
-    }
-    return false
+function esNumeroValido(cadena){
+
+    let res = parseInt(cadena)
+    return (!isNaN(res))
+
 }
