@@ -22,7 +22,7 @@ body {
   position: relative;
   height: auto;
   width: auto;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 6px 6px 6px rgba(18, 5, 102, 0.6117647059);
   background-color: rgba(255, 255, 255, 0.071);
@@ -37,12 +37,25 @@ body {
   width: 2.5rem;
   height: 2rem;
   background: none;
+  margin: 0.1rem;
   border: 1px solid rgba(249, 249, 249, 0.233);
+  cursor: pointer;
+  transition: all 450ms ease;
+}
+.calculator button:hover {
+  transform: scale(1.2);
+  color: rgb(1, 1, 1);
+  background-color: rgba(255, 255, 255, 0.3843137255);
 }
 .calculator button#clear {
   background-color: #EE6055;
   color: #FDE74C;
   border: #60D394;
+}
+.calculator button#clear:hover {
+  transform: scale(1.2);
+  color: rgb(243, 247, 13);
+  background-color: rgba(239, 64, 64, 0.7725490196);
 }
 .calculator .btn-number {
   color: rgb(255, 255, 255);
@@ -50,4 +63,21 @@ body {
 .calculator .btn-operator {
   color: rgb(5, 30, 10);
   font-weight: 1000;
+}
+.calculator .btn-operator:hover {
+  transform: scale(1.2);
+  color: rgb(251, 251, 251);
+  background-color: rgba(0, 0, 0, 0.3843137255);
+  border-radius: 50%;
+}
+.calculator .btn-delete:hover {
+  transform: scale(1.2);
+  color: rgb(255, 255, 255);
+  background-color: rgba(254, 0, 0, 0.5843137255);
+}
+.calculator .special {
+  width: 5.35rem;
+}
+.calculator .special:hover {
+  border-radius: 0%;
 }/*# sourceMappingURL=style.css.map */

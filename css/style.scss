@@ -21,7 +21,7 @@ body {
     position: relative;
     height: auto;
     width: auto;
-    padding:20px;
+    padding:30px;
     // border: 1px solid black;
     border-radius: 10px;
     box-shadow: 6px 6px 6px #1205669c;
@@ -32,17 +32,33 @@ body {
         padding:15px 10px;
         border-radius: 6px;
     }
+
     button{
         width: 2.5rem;
         height:2rem;
         background: none;
+        margin:0.1rem;
         border: 1px solid rgba(249, 249, 249, 0.233);
+        cursor: pointer;
+        transition: all 450ms ease;
+        &:hover {
+            transform:scale(1.2);
+            color:rgb(1, 1, 1);
+            background-color: #ffffff62;
+
+        }
 
     }
     button#clear {
         background-color: #EE6055;
         color: #FDE74C;
         border: #60D394;
+        &:hover {
+            transform:scale(1.2);
+            color:rgb(243, 247, 13);
+            background-color: #ef4040c5;
+
+        }
     }
     .btn-number{
         color: rgb(255, 255, 255)
@@ -50,6 +66,28 @@ body {
     .btn-operator{
         color: rgb(5, 30, 10);
         font-weight: 1000;
+        &:hover {
+            transform:scale(1.2);
+            color:rgb(251, 251, 251);
+            background-color: #00000062;
+            border-radius: 50%;
+
+        }
+    }
+    .btn-delete{
+        &:hover {
+            transform:scale(1.2);
+            color:rgb(255, 255, 255);
+            background-color: #fe000095;
+
+        }
+    }
+    .special {
+        width: 5.35rem;
+        &:hover {
+            border-radius: 0%;
+        }
+
     }
     
 }
