@@ -2,57 +2,62 @@
 window.addEventListener("load", function(event) {
     const display = document.querySelector("#display")
     const btns = document.querySelectorAll("button")
-    console.log(display)
-    console.log(btns)
     let operando = "X"
+
     /* ------------- Agregar funcion a cada boton de la calculadora ------------- */
+
     btns.forEach((btn => {
         btn.addEventListener("click", (e)=>{
-            console.log(operando)
-            //BOTON AC
             if (e.target.id == "clear"){
+                //Botón AC
                 display.textContent= ""
             }else if (e.target.id =="delete"){
-                //BOTON DEL
-                //el -1, es para que guarde todo el string menos el ultimo elemento de la cadena.
+                //Botón DEL
                 if (esNumeroValido(display.innerText)){
                     operando = "X"
                 }
                 display.innerText = display.innerText.slice(0,-1)
-            }else if (e.target.id =="percentage"){
+
+                /* ------------------------- //Botónes de operadores ------------------------ */
+
+            }else if (e.target.id =="percentage" && operando == "X" && display.innerText.length < 9){
                 if (esNumeroValido(display.innerText)) {
                     display.innerText += "%"
                     operando = "%"
                 }
-            }else if (e.target.id =="divider"){
+            }else if (e.target.id =="divider" && operando == "X" && display.innerText.length < 9){
                 if (esNumeroValido(display.innerText)) {
                     display.innerText += "/"
                     operando = "/"
                 }
-            }else if (e.target.id =="multiplier"){
+            }else if (e.target.id =="multiplier" && operando == "X" && display.innerText.length < 9){
                 if (esNumeroValido(display.innerText)) {
                     display.innerText += "*"
                     operando = "*"
                 }
-            }else if (e.target.id =="subtract"){
+            }else if (e.target.id =="subtract" && operando == "X" && display.innerText.length < 9){
                 if (esNumeroValido(display.innerText)) {
                     display.innerText += "-"
                     operando = "-"
                 }
-            }else if (e.target.id =="sum"){
+            }else if (e.target.id =="sum" && operando == "X" && display.innerText.length < 9){
                 if (esNumeroValido(display.innerText)) {
                     display.innerText += "+"
                     operando = "+"
                 }
-            }else if (e.target.id =="."){
+            }else if (e.target.id =="." && operando == "X" && display.innerText.length < 8){
                 if (esNumeroValido(display.innerText)) {
                     display.innerText += "."
-                    operando = "."
+
                 }
-            }else if (e.target.classList.contains("btn-number")){
+
+                /* --------------------------- Botónes de numeros --------------------------- */
+
+            }else if (e.target.classList.contains("btn-number") && ((display.innerText.length < 8) || (display.innerText.length < 10 && operando !=="X"))){
                 display.innerText += e.target.id
             }else if (display.innerText != "" && e.target.id == "equal"){
-                //Si el display esta vacio, y si se presiono =,evaluar operador...
+
+                /* --------------------- Botón =, display con contenido --------------------- */
 
                 if (esNumeroValido(display.innerText) && operando!="X"){
                     
@@ -74,7 +79,7 @@ window.addEventListener("load", function(event) {
                         let res =divide(parseFloat(valores[0]),parseFloat(valores[1]))
                         console.log(res)
                         display.innerText = res.toString()
-                    }else if(operando ="%"){
+                    }else if(operando == "%"){
                         let res =percentage(parseFloat(valores[0]),parseFloat(valores[1]))
                         console.log(res)
                         display.innerText = res.toString()
